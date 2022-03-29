@@ -1365,6 +1365,11 @@ const readLine = (input) => {
 }
 
 const lingoToPy = (lingo) => {
+
+    function reverse(s){
+        return s.split("").reverse().join("");
+    }
+
     let setList = [
         'customer',
         'product',
@@ -1376,6 +1381,7 @@ const lingoToPy = (lingo) => {
         'age3',
         'age4',
         'age5',
+        'age6',
         'age7',
         'age8',
         'milking',
@@ -1513,10 +1519,10 @@ const lingoToPy = (lingo) => {
                 }
                 endPosition = i;
                 if (i == condition.length - 1) {
-                    condition = condition.substring(0, startPosition + 1).trim() + ` at(${valueMemory}, ${variableMapping[variableName.trim()]}_range)`;
+                    condition = condition.substring(0, startPosition + 1).trim() + ` at(${valueMemory}, ${variableMapping[reverse(variableName.trim())]}_range)`;
                     break
                 } else {
-                    condition = condition.substring(0, startPosition + 1).trim() + ` at(${valueMemory}, ${variableMapping[variableName.trim()]}_range) ` + condition.substring(endPosition, condition.length);
+                    condition = condition.substring(0, startPosition + 1).trim() + ` at(${valueMemory}, ${variableMapping[reverse(variableName.trim())]}_range) ` + condition.substring(endPosition, condition.length);
                 }
                 variableName = '';
                 startValue = false;

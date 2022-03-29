@@ -1,4 +1,9 @@
 const lingoToPy = (lingo) => {
+
+    function reverse(s){
+        return s.split("").reverse().join("");
+    }
+
     let setList = [
         'customer',
         'product',
@@ -9,6 +14,7 @@ const lingoToPy = (lingo) => {
         'age2',
         'age3',
         'age4',
+        'age6',
         'age5',
         'age7',
         'age8',
@@ -180,10 +186,10 @@ const lingoToPy = (lingo) => {
                 }
                 endPosition = i;
                 if (i == condition.length - 1) {
-                    condition = condition.substring(0, startPosition + 1).trim() + ` at(${valueMemory}, ${variableMapping[variableName.trim()]}_range)`;
+                    condition = condition.substring(0, startPosition + 1).trim() + ` at(${valueMemory}, ${variableMapping[reverse(variableName.trim())]}_range)`;
                     break
                 } else {
-                    condition = condition.substring(0, startPosition + 1).trim() + ` at(${valueMemory}, ${variableMapping[variableName.trim()]}_range) ` + condition.substring(endPosition, condition.length);
+                    condition = condition.substring(0, startPosition + 1).trim() + ` at(${valueMemory}, ${variableMapping[reverse(variableName.trim())]}_range) ` + condition.substring(endPosition, condition.length);
                 }
                 variableName = '';
                 startValue = false;
@@ -699,4 +705,6 @@ const lingoToPy = (lingo) => {
     return output;
 }
 
-console.log(lingoToPy('@for(links9(a,t,rr,b) | a #EQ# 2 #AND# rr #EQ# 2 #AND# b #LE# 2 : E1X(a,t,rr,b) <= 100;	E1Y(a,t,rr,b) <= 20;  E1Herd(a,t,rr,b) >= 10; E1Herd(a,t,rr,b) >= 5;);'.toLowerCase()));
+console.log(lingoToPy(`
+@for(time(t) | t #eq# 1:@for(age5(a) | a #eq# 10 : @for(age6(ab) | ab #eq# 2 : @for(milking2(r) | r #eq# 2:d2herd(ab,t,r) = ed10(a-1) + d2herd0(ab-1,r-1) + d1x(ab,t,r) - d1y(ab,t,r); )));@for(age5(a) | a #eq# 11 : @for(age6(ab) | ab #eq# 3 : @for(milking2(r) | r #eq# 2: d2herd(ab,t,r) = ed10(a-1) + d2herd0(ab-1,r-1) + d1x(ab,t,r) - d1y(ab,t,r); )));@for(age5(a) | a #eq# 12 : @for(age6(ab) | ab #eq# 4 : @for(milking2(r) | r #eq# 2: d2herd(ab,t,r) = ed10(a-1) + d2herd0(ab-1,r-1) + d1x(ab,t,r) - d1y(ab,t,r); )));@for(age5(a) | a #eq# 13 : @for(age6(ab) | ab #eq# 5 : @for(milking2(r) | r #eq# 2:d2herd(ab,t,r) = ed10(a-1) + d2herd0(ab-1,r-1) + d1x(ab,t,r) - d1y(ab,t,r); )));@for(age5(a) | a #eq# 14 : @for(age6(ab) | ab #eq# 6 : @for(milking2(r) | r #eq# 2: d2herd(ab,t,r) = ed10(a-1) + d2herd0(ab-1,r-1) + d1x(ab,t,r) - d1y(ab,t,r); )));@for(age5(a) | a #eq# 15 : @for(age6(ab) | ab #eq# 7 : @for(milking2(r) | r #eq# 2: d2herd(ab,t,r) = ed10(a-1) + d2herd0(ab-1,r-1) + d1x(ab,t,r) - d1y(ab,t,r); )));@for(age5(a) | a #eq# 16 : @for(age6(ab) | ab #eq# 8 : @for(milking2(r) | r #eq# 2: d2herd(ab,t,r) = ed10(a-1) + d2herd0(ab-1,r-1) + d1x(ab,t,r) - d1y(ab,t,r); ))););
+`.toLowerCase()));
