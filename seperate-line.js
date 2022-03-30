@@ -42,17 +42,17 @@ const lingoCode = `
 		!heifers with 15 M change from calf;				
 
 					!Initial;		@for(age2(a) | a #EQ# 1: @for(time(t) | t #EQ# 1 :
-									BHerd(a,t) = BH0 + BX(a,t) - BY(a,t) - BZ(a,t) ));
+									BHerd(a,t) = BH0 + BX(a,t) - BY(a,t) - BZ(a,t)));
 					!change;		@for(age2(a) | a #EQ# 1: @for(time(t) | t #GT# 1:
-									BHerd(a,t) = BH(t-1) + BX(a,t) - BY(a,t) - BZ(a,t) ));
+									BHerd(a,t) = BH(t-1) + BX(a,t) - BY(a,t) - BZ(a,t)));
 
 
 		! Herd Structure Balance;
 
 					!Initial;		@for(age2(a) | a #GT# 1: @for(time(t) | t #EQ# 1:
-									BHerd(a,t) = BHerd1(a-1) + BX(a,t) - BY(a,t) ));
+									BHerd(a,t) = BHerd1(a-1) + BX(a,t) - BY(a,t)));
 								@for(age2(a) | a #GT# 1: @for(time(t) | t #GT# 1:
-									BHerd(a,t) = BHerd(a-1,t-1) + BX(a,t) - BY(a,t) ));
+									BHerd(a,t) = BHerd(a-1,t-1) + BX(a,t) - BY(a,t)));
 
 		! AI Success;				@for(age2(a): @for(time(t): BZ(a,t) = BR*BHerd(a,t)));
 								@for(age2(a): BZ0	= BR*BHerd0(a));
@@ -131,16 +131,16 @@ const lingoCode = `
 								
 
 	! change from Heifers;				@for(age2(a) : @for(age3(a) : @for(time(t) | t #EQ# 1 : @for(gestation(b) | b #EQ# 1:
-									CHerd(a,t,b) = CB0(a) + CX(a,t,b) - CY(a,t,b) ))));
+									CHerd(a,t,b) = CB0(a) + CX(a,t,b) - CY(a,t,b)))));
 								@for(age2(a) : @for(age3(a) : @for(time(t) | t #GT# 1 : @for(gestation(b) | b #EQ# 1:
-									CHerd(a,t,b) = CB(a,t-1) + CX(a,t,b) - CY(a,t,b) ))));
+									CHerd(a,t,b) = CB(a,t-1) + CX(a,t,b) - CY(a,t,b)))));
 
 	! Herd Structure Balance;			
 
 		! Initial;					@for(age3(a) | a #GT# 1 : @for(time(t) | t #EQ# 1 : @for(gestation(b) | b #GT# 1 :
-									CHerd(a,t,b) = CHerd0(a-1,b-1) + CX(a,t,b) - CY(a,t,b) )));
+									CHerd(a,t,b) = CHerd0(a-1,b-1) + CX(a,t,b) - CY(a,t,b))));
 								@for(age3(a) | a #GT# 1 : @for(time(t) | t #GT# 1 : @for(gestation(b) | b #GT# 1 :
-									CHerd(a,t,b) = CHerd(a-1,t-1,b-1) + CX(a,t,b) - CY(a,t,b) )));
+									CHerd(a,t,b) = CHerd(a-1,t-1,b-1) + CX(a,t,b) - CY(a,t,b))));
 
 	! Boundaries;					@for(time(t) :	@SUM(age3(a) : @SUM(gestation(b) | b #LT# 9 : CHerd(a,t,b))) <= 1000;
 											!@SUM(age3(a) : @SUM(gestation(b) | b #LT# 9 : CHerd(a,t,b))) >= 800;
@@ -206,31 +206,31 @@ const lingoCode = `
 									
 	! Initial Herd structure;			
 								@for(age3(ab) | ab #GE# 2 : @for(time(t) | t #EQ# 1 : @for(milking(r) | r #EQ# 3:
-									D1Herd(ab,t,r) = D1Herd0(ab-1,r-1) + D1X(ab,t,r) - D1Y(ab,t,r) - D1Z(ab,t,r) )));
+									D1Herd(ab,t,r) = D1Herd0(ab-1,r-1) + D1X(ab,t,r) - D1Y(ab,t,r) - D1Z(ab,t,r))));
 
 								@for(age3(ab) | ab #GE# 2 : @for(time(t) | t #EQ# 1 : @for(milking(r) | r #EQ# 4:
-									D1Herd(ab,t,r) = D1Herd1(ab-1,r-1) + D1X(ab,t,r) - D1Y(ab,t,r) - D1Z(ab,t,r) )));
+									D1Herd(ab,t,r) = D1Herd1(ab-1,r-1) + D1X(ab,t,r) - D1Y(ab,t,r) - D1Z(ab,t,r))));
 
 								@for(age3(ab) | ab #GE# 2 : @for(time(t) | t #EQ# 1 : @for(milking(r) | r #EQ# 5:
-									D1Herd(ab,t,r) = D1Herd1(ab-1,r-1) + D1X(ab,t,r) - D1Y(ab,t,r) - D1Z(ab,t,r) )));
+									D1Herd(ab,t,r) = D1Herd1(ab-1,r-1) + D1X(ab,t,r) - D1Y(ab,t,r) - D1Z(ab,t,r))));
 
 								@for(age3(ab) | ab #GE# 2 : @for(time(t) | t #EQ# 1 : @for(milking(r) | r #EQ# 6:
-									D1Herd(ab,t,r) = D1Herd1(ab-1,r-1) + D1X(ab,t,r) - D1Y(ab,t,r) - D1Z(ab,t,r) )));
+									D1Herd(ab,t,r) = D1Herd1(ab-1,r-1) + D1X(ab,t,r) - D1Y(ab,t,r) - D1Z(ab,t,r))));
 					
 								@for(age3(ab) | ab #GE# 2 : @for(time(t) | t #EQ# 1 : @for(milking(r) | r #EQ# 7:
-									D1Herd(ab,t,r) = D1Herd1(ab-1,r-1) + D1X(ab,t,r) - D1Y(ab,t,r) )));
+									D1Herd(ab,t,r) = D1Herd1(ab-1,r-1) + D1X(ab,t,r) - D1Y(ab,t,r))));
 
 								@for(age3(ab) | ab #GE# 2 : @for(time(t) | t #EQ# 1 : @for(milking(r) | r #GT# 7:
-									D1Herd(ab,t,r) = D1Herd0(ab-1,r-1) + D1X(ab,t,r) - D1Y(ab,t,r) )));
+									D1Herd(ab,t,r) = D1Herd0(ab-1,r-1) + D1X(ab,t,r) - D1Y(ab,t,r))));
 
 								@for(age3(ab) | ab #GE# 2 : @for(time(t) | t #GE# 2 : @for(milking(r) | r #EQ# 2:
-									D1Herd(ab,t,r) = D1Herd(ab-1,t-1,r-1) + D1X(ab,t,r) - D1Y(ab,t,r) )));
+									D1Herd(ab,t,r) = D1Herd(ab-1,t-1,r-1) + D1X(ab,t,r) - D1Y(ab,t,r))));
 
 								@for(age3(ab) | ab #GE# 2 : @for(time(t) | t #GE# 2 : @for(milking(r) | r #GE# 3 #AND# r #LE# 6:
-									D1Herd(ab,t,r) = D1Herd(ab-1,t-1,r-1) + D1X(ab,t,r) - D1Y(ab,t,r) - D1Z(ab,t,r) )));
+									D1Herd(ab,t,r) = D1Herd(ab-1,t-1,r-1) + D1X(ab,t,r) - D1Y(ab,t,r) - D1Z(ab,t,r))));
 
 								@for(age3(ab) | ab #GE# 2 : @for(time(t) | t #GE# 2 : @for(milking(r) | r #GE# 7:
-									D1Herd(ab,t,r) = D1Herd(ab-1,t-1,r-1) + D1X(ab,t,r) - D1Y(ab,t,r) )));
+									D1Herd(ab,t,r) = D1Herd(ab-1,t-1,r-1) + D1X(ab,t,r) - D1Y(ab,t,r))));
 
 
 	! AI Success;					@for(links8(ab,t,r) | r #GE# 3 #AND# r #LE# 6 : D1Z(ab,t,r) = DR*D1Herd(ab,t,r));
@@ -592,13 +592,13 @@ const lingoCode = `
 									E1Herd(a,t,rr,b) = DE1(ab,t,r) + E1X(a,t,rr,b) - E1Y(a,t,rr,b) - E1Abt(a,t,rr,b)))))));
 
 		! initial change structure;		@for(age5(a) | a #GE# 2: @for(time(t) | t #EQ# 1 : @for(gestation(b) | b #GE# 2: @for(milkingE(rr) | rr #GE# 2 #AND# rr #LE# 6:
-									E1Herd(a,t,rr,b) = E1Herd0(a-1,rr-1,b-1) + E1X(a,t,rr,b) - E1Y(a,t,rr,b) - E1Abt(a,t,rr,b) ))));
+									E1Herd(a,t,rr,b) = E1Herd0(a-1,rr-1,b-1) + E1X(a,t,rr,b) - E1Y(a,t,rr,b) - E1Abt(a,t,rr,b)))));
 
 								@for(age5(a) | a #GE# 2: @for(time(t) | t #EQ# 1 : @for(gestation(b) | b #GE# 2: @for(milkingE(rr) | rr #GE# 7 :
-									E1Herd(a,t,rr,b) = E1Herd0(a-1,rr-1,b-1) + E1X(a,t,rr,b) - E1Y(a,t,rr,b) - E1Abt(a,t,rr,b) ))));
+									E1Herd(a,t,rr,b) = E1Herd0(a-1,rr-1,b-1) + E1X(a,t,rr,b) - E1Y(a,t,rr,b) - E1Abt(a,t,rr,b)))));
 
 								@for(links9(a,t,rr,b) | a #GE# 2 #AND# t #GE# 2 #AND# b #GE# 2 #AND# rr #GE# 2:
-									E1Herd(a,t,rr,b) = E1Herd(a-1,t-1,rr-1,b-1) + E1X(a,t,rr,b) - E1Y(a,t,rr,b) - E1Abt(a,t,rr,b) );
+									E1Herd(a,t,rr,b) = E1Herd(a-1,t-1,rr-1,b-1) + E1X(a,t,rr,b) - E1Y(a,t,rr,b) - E1Abt(a,t,rr,b));
 
 		! Calf 0 months;				@for(time(t) : @for(gestation(b) | b #EQ# 9 : AM1(t) = @SUM(milkingE(rr) | rr #GE# 8 : @SUM(age5(a) | a #GE# 9 : FR*E1Herd(a,t,rr,b)))));
 								@for(gestation(b) | b #EQ# 9: AM10 = @SUM(milkingE(rr) | rr #GE# 8 : @SUM(age5(a) | a #GE# 9 : FR*E1Herd0(a,rr,b))));								
@@ -695,7 +695,7 @@ const lingoCode = `
 									
 
 								@for(age6(ab) | ab #GE# 2 : @for(time(t) | t #EQ# 1 : @for(milking(r) | r #EQ# 3:
-									D2Herd(ab,t,r) = D2Herd0(ab-1,r-1) + D2X(ab,t,r) - D2Y(ab,t,r) - D2Z(ab,t,r) )));
+									D2Herd(ab,t,r) = D2Herd0(ab-1,r-1) + D2X(ab,t,r) - D2Y(ab,t,r) - D2Z(ab,t,r))));
 
 								@for(age6(ab) | ab #GE# 2 : @for(time(t) | t #EQ# 1 : @for(milking(r) | r #EQ# 4:
 									D2Herd(ab,t,r) = D2Herd0(ab-1,r-1) + D2X(ab,t,r) - D2Y(ab,t,r) - D2Z(ab,t,r))));
@@ -715,7 +715,7 @@ const lingoCode = `
 		! Herd Structure balance;
 
 								@for(age6(ab) | ab #GE# 2 : @for(time(t) | t #GE# 2 : @for(milking(r) | r #EQ# 2:
-									D2Herd(ab,t,r) = D2Herd(ab-1,t-1,r-1) + D2X(ab,t,r) - D2Y(ab,t,r) )));
+									D2Herd(ab,t,r) = D2Herd(ab-1,t-1,r-1) + D2X(ab,t,r) - D2Y(ab,t,r))));
 
 								@for(age6(ab) | ab #GE# 2 : @for(time(t) | t #GE# 2 : @for(milking(r) | r #GE# 3 #AND# r #LE# 6:
 									D2Herd(ab,t,r) = D2Herd(ab-1,t-1,r-1) + D2X(ab,t,r) - D2Y(ab,t,r) - D2Z(ab,t,r))));
@@ -1086,9 +1086,9 @@ const lingoCode = `
 									E2Herd(a,t,rr,b) = DE2(ab,t,r) + E2X(a,t,rr,b) - E2Y(a,t,rr,b) - E2Abt(a,t,rr,b)))))));
 
 		! initial change structure;		@for(age7(a) | a #GE# 2: @for(time(t) | t #EQ# 1 : @for(gestation(b) | b #GE# 2: @for(milkingE2(rr) | rr #GE# 2 :
-									E2Herd(a,t,rr,b) = E2Herd0(a-1,rr-1,b-1) + E2X(a,t,rr,b) - E2Y(a,t,rr,b) - E2Abt(a,t,rr,b) ))));
+									E2Herd(a,t,rr,b) = E2Herd0(a-1,rr-1,b-1) + E2X(a,t,rr,b) - E2Y(a,t,rr,b) - E2Abt(a,t,rr,b)))));
 								@for(links17(a,t,rr,b) | a #GE# 2 #AND# t #GE# 2 #AND# b #GE# 2 #AND# rr #GE# 2:
-									E2Herd(a,t,rr,b) = E2Herd(a-1,t-1,rr-1,b-1) + E2X(a,t,rr,b) - E2Y(a,t,rr,b) - E2Abt(a,t,rr,b) );
+									E2Herd(a,t,rr,b) = E2Herd(a-1,t-1,rr-1,b-1) + E2X(a,t,rr,b) - E2Y(a,t,rr,b) - E2Abt(a,t,rr,b));
 
 ! Calf 0 months;						@for(time(t) : @for(gestation(b) | b #EQ# 9 : AM2(t) = @SUM(milkingE2(rr) | rr #GE# 8 : @SUM(age7(a) | a #GE# 9 : FR*E2Herd(a,t,rr,b)))));
 								@for(gestation(b) | b #EQ# 9: AM20 = @SUM(milkingE2(rr) | rr #GE# 8 : @SUM(age7(a) | a #GE# 9 : FR*E2Herd0(a,rr,b))));								
@@ -1170,7 +1170,7 @@ const lingoCode = `
 								@for(age7(a) | a #EQ# 11 : @for(age8(ab) | ab #EQ# 3 : @for(time(t) | t #GE# 1 : @for(milking3(r) | r #EQ# 1 : 
 									D3Herd(ab,t,r) = ED2(a,t) + D3X(ab,t,r) - D3Y(ab,t,r)))));
 								@for(age7(a) | a #EQ# 12 : @for(age8(ab) | ab #EQ# 4 : @for(time(t) | t #GE# 1 : @for(milking3(r) | r #EQ# 1 : 
-									D3Herd(ab,t,r) = ED2(a,t) + D3X(ab,t,r) - D3Y(ab,t,r) ))));
+									D3Herd(ab,t,r) = ED2(a,t) + D3X(ab,t,r) - D3Y(ab,t,r)))));
 								@for(age7(a) | a #EQ# 13 : @for(age8(ab) | ab #EQ# 5 : @for(time(t) | t #GE# 1 : @for(milking3(r) | r #EQ# 1 : 
 									D3Herd(ab,t,r) = ED2(a,t) + D3X(ab,t,r) - D3Y(ab,t,r)))));
 								@for(age7(a) | a #EQ# 14 : @for(age8(ab) | ab #EQ# 6 : @for(time(t) | t #GE# 1 : @for(milking3(r) | r #EQ# 1 : 
@@ -1183,11 +1183,11 @@ const lingoCode = `
 	! Herd structure balance;	
 								
 			! Initial;				@for(age8(ab) | ab #GE# 2 #AND# ab #LE# 6 : @for(time(t) | t #EQ# 1 : @for(milking3(r) | r #EQ# 2 : 
-									D3Herd(ab,t,r) = D3Herd0Total(ab-1,r-1) + D3X(ab,t,r) - D3Y(ab,t,r) )));
+									D3Herd(ab,t,r) = D3Herd0Total(ab-1,r-1) + D3X(ab,t,r) - D3Y(ab,t,r))));
 								@for(age8(ab) | ab #GE# 7 : @for(time(t) | t #EQ# 1 : @for(milking3(r) | r #GE# 2:
-									D3Herd(ab,t,r) = D3Herd0(ab-1,r-1) + D3X(ab,t,r) - D3Y(ab,t,r) )));
+									D3Herd(ab,t,r) = D3Herd0(ab-1,r-1) + D3X(ab,t,r) - D3Y(ab,t,r))));
 								@for(age8(ab) | ab #GE# 2 #AND# ab #LE# 6 : @for(time(t) | t #EQ# 1 : @for(milking3(r) | r #GE# 3:
-									D3Herd(ab,t,r) = D3Herd0(ab-1,r-1) + D3X(ab,t,r) - D3Y(ab,t,r) )));
+									D3Herd(ab,t,r) = D3Herd0(ab-1,r-1) + D3X(ab,t,r) - D3Y(ab,t,r))));
 
 								@for(age8(ab) | ab #GE# 2 : @for(time(t) | t #GE# 2 : @for(milking3(r) | r #GE#2 :
 									D3Herd(ab,t,r) = D3Herd(ab-1,t-1,r-1) + D3X(ab,t,r) - D3Y(ab,t,r))));
@@ -1370,6 +1370,10 @@ const lingoToPy = (lingo) => {
         return s.split("").reverse().join("");
     }
 
+	let constantList = [
+		'pv'
+	]
+
     let setList = [
         'customer',
         'product',
@@ -1442,6 +1446,17 @@ const lingoToPy = (lingo) => {
     
         return false;
     }
+
+	const isConstant = (input) => {
+        for (let i = 0 ; i < constantList.length ; ++i) {
+    
+            if (input == constantList[i]) {
+                return true;
+            }
+        }
+    
+        return false; 
+	}
     
     const isDerived = (input) => {
         return derivedSet[input] != null;
@@ -1460,8 +1475,8 @@ const lingoToPy = (lingo) => {
         condition = condition.replace(/#le#/g, '<=');
         condition = condition.replace(/#gt#/g, '>');
         condition = condition.replace(/#lt#/g, '<');
-        condition = condition.replace(/#and#/g, '&&');
-        condition = condition.replace(/#or#/g, '||');
+        condition = condition.replace(/#and#/g, 'and');
+        condition = condition.replace(/#or#/g, 'or');
     
         let valueMemory = '';
         let startValue = false;
@@ -1818,7 +1833,8 @@ const lingoToPy = (lingo) => {
             // constant
             // rawOutput += memory.trim() + ' ' + operator + ' ';
             logger('constant=' + memory.trim());
-            rawOutput += `${memory.trim()} ${operator} `
+            memory = memory.replace(';', '');
+            rawOutput += `${isNumber(memory.trim()) ? `${memory.trim()}` : ((memory.trim().includes('$$') || isConstant(memory.trim())) ? memory.trim() : `d['${memory.trim()}']`)} ${operator} `
         }
     }
     
@@ -1846,12 +1862,13 @@ const lingoToPy = (lingo) => {
             }
     
             logger(`variableName=${variableName} variableScope=${variableScope}`);
-            rawSumOutput += `d[kk('${variableName.trim()}',${variableScope})] ${operator} `
+            rawSumOutput += `d[kk('${variableName.trim()}',${variableScope})] ${sumOperator} `
         } else {
             // constant
             // rawOutput += memory.trim() + ' ' + operator + ' ';
             logger('constant=' + memory.trim());
-            rawSumOutput += `${memory.trim()} ${operator} `
+            memory = memory.replace(';', '');
+            rawSumOutput += `${isNumber(memory.trim()) ? `${memory.trim()}` : ((memory.trim().includes('$$') || isConstant(memory.trim())) ? memory.trim() : `d['${memory.trim()}']`)} ${sumOperator} `
         }
     }
     
@@ -2038,15 +2055,19 @@ const lingoToPy = (lingo) => {
     return output;
 }
 
-const resultLine = readLine(lingoCode);
+// const resultLine = readLine(lingoCode);
 
-let fileResult = '';
+// let fileResult = '';
 
-for (let l = 0 ; l < resultLine.length ; ++l) {
-    fileResult += `\n# ${resultLine[l]}\n${lingoToPy(resultLine[l])}\n`;
-}
+// for (let l = 0 ; l < resultLine.length ; ++l) {
+//     fileResult += `\n# ${resultLine[l]}\n${lingoToPy(resultLine[l])}\n`;
+// }
 
-fs.writeFile('output.py', fileResult, function (err) {
-    if (err) return console.log(err);
-    console.log('Success');
-});
+// fs.writeFile('output.py', fileResult, function (err) {
+//     if (err) return console.log(err);
+//     console.log('Success');
+// });
+
+// console.log(lingoToPy('COST		= @SUM(LINKS2(t,j) : RC(t,j)*H(t,j))+@SUM(LINKS4(t,k):BC(t,k)*V(t,k))+@SUM(LINKS1(t,i):PC(i)*Y(t,i));'.toLowerCase()));
+
+console.log(lingoToPy('@for(gestation(k): @sum(time(t): @sum(product(i): dherd1(t))));'.toLowerCase()))
